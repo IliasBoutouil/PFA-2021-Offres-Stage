@@ -1,6 +1,6 @@
 # Esmi Stagiare
 Ce projet est une web application que j'ai réalisé durant mon PFA en 3ème année à l'École Marocaine des Sciences de l'Ingénieur en utilisant le Framework DjangCancel changeso.
-le sujet consiste à réaliser une plateforme pour les offres de stage dédiée uniquement aux étudiants de l'EMSI ainsi qu'aux recruteurs agréés par l'école.
+le sujet consiste à réaliser une plateforme pour les offres de stage dédiée uniquement aux étudiants de l'EMSI ainsi qu'aux recruteurs agréés par l'école. <br />
 Backend : Django <br />
 Front : Bootstrap Css <br />
 DB : SqLite <br />
