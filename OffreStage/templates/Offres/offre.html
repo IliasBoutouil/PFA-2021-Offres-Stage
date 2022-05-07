@@ -1,0 +1,17 @@
+{% extends '../master.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="d-flex justify-content-center  p-5 m-5">
+    <div class="col">
+      <h3 class="text-uppercase">{{offre.titre}} - {{offre.domaine}}</h3>
+      <h6 class="text-success">{{offre.user.nom_entreprise}}</h6>
+      <h6 class="text-muted">Publié le : {{offre.date_publication}} </h6>
+      <p>{{offre.description}}</p>
+      <h6 class="text-secondary"> Prériode : {{offre.periode}} mois</h6>
+      <h6>Envoyez nous vos documents (CV et lettre de motiviation) via : <span class="text-success">{{offre.user.email}}</span> </h6>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

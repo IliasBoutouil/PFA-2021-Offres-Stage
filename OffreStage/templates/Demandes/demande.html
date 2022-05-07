@@ -1,0 +1,20 @@
+{% extends '../master.html' %}
+{% block title %}
+<title>Demande</title>
+{% endblock %}
+{% block content %}
+<div class="container my-5">
+  <div class="d-flex justify-content-center  p-5 m-5">
+
+    <div class="col">
+      <h3 class="text-uppercase">{{demande.titre}} - {{demande.domaine}}</h3>
+      <h6 class="text-success"><a class="text-decoration-none" href="{% url 'Etudiant' pk=demande.user.id%}">{{demande.user.first_name}} {{demande.user.last_name}}</a></h6>
+      <h6 class="text-muted">{{demande.date_publication}} </h6>
+      <p>{{demande.description}}</p>
+      <h6>Email : <span class="text-success">{{demande.user.email}}</span> </h6>
+      <h6 class="text-secondary">Prériode : {{demande.periode}} mois</h6>
+      <h6><a href="{{demande.user.Cv.url}}" class="text-decoration-none text-uppercase">Consutler le cv <i class="fas fa-file-alt"></i></a> </h6>
+    </div>
+  </div>
+</div>
+{% endblock %}

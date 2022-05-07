@@ -1,0 +1,113 @@
+{% extends '../master.html' %}
+{% load static %}
+{% block styling %}
+<link rel="stylesheet" href="{% static 'css/Auth/signup.css' %}">
+{% endblock %}
+{% block title %}
+<title>S'inscrire</title>
+{% endblock %}
+{% block content %}
+<div class="container signup mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-success">inscrivez-vous pour accéder à plus de fonctionnalités</h3>
+      <p class="text-muted">veuillez remplir tous les champs du formulaire ci-joint afin de créer votre compte </p>
+    </div>
+    <div class="col-6">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-2">
+            Vous êtes :
+          </div>
+          <div class="mb-1 col-2 form-check form-switch">
+            <input class="form-check-input" checked type="radio" value="student" id="etudiant_rb" name="account_type">
+            <label class="form-check-label">Étudiant</label>
+          </div>
+          <div class="mb-1 col-2 form-check form-switch">
+            <input class="form-check-input" type="radio" value="recruteur"  id="recruteur_rb" name="account_type">
+            <label class="form-check-label">Recruteur</label>
+          </div>
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Nom :</label>
+          {{form.first_name}}
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Prenom :</label>
+          {{form.last_name}}
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Nom d'utilisateur :</label>
+          {{form.username}}
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Adresse e-mail :</label>
+          {{form.email}}
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Numéro téléphone :</label>
+          {{form.phone_number}}
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Adresse :</label>
+          <textarea class="form-control w-75" name="address"  rows="2"></textarea>
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Date naissance :</label>
+          <input type="date" name="birthday" required="" id="id_birthday">
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Nom filière/domaine :</label>
+          <select class="form-select w-75" name="domaine">
+            <option selected disabled>Choisir une filière</option>
+            <option value="informatique et réseaux">INFORMATIQUE ET RÉSEAUX</option>
+            <option value="financière et audit">FINANCIÈRE ET AUDIT</option>
+            <option value="génie civil, bâtiments et travaux publics">GÉNIE CIVIL, BÂTIMENTS ET TRAVAUX PUBLICS</option>
+            <option value="automatismes et informatique industrielle">AUTOMATISMES ET INFORMATIQUE INDUSTRIELLE</option>
+          </select>
+        </div>
+        <div class="etudiant">
+          <div class="mb-1">
+            <label class="form-label">Photo :</label>
+            <input class="form-control" type="file" name="photo">
+          </div>
+          <div class="mb-1">
+            <label class="form-label">Curriculum vitae :</label>
+            <input class="form-control" type="file" name="Cv">
+          </div>
+        </div>
+        <div class="recruteur" style="display: none;">
+          <div class="mb-1">
+            <label class="form-label">Nom d'entreprise :</label>
+            <input type="text" class="form-control" name="nom_entreprise">
+          </div>
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Mot de passe :</label>
+          <input type="password" name="password" maxlength="128" required="" id="id_password">
+        </div>
+        <div class="row">
+          <p class="my-2">Vous avez déjà un compte ?  <a class="text-success text-decoration-none" href="{% url 'Login'%}">Connectez vous </a></p>
+        </div>
+        <button type="submit" class="btn btn-success my-3 ">Continuer</button>
+      </form>
+    </div>
+    <div class="col-6"><img class="w-75" src="/media/media_style/signup.png" alt="" srcset=""></div>
+  </div>
+</div>
+{%block scripts %}
+<script>
+$(document).ready(function(){
+  $("#recruteur_rb").click(function(){
+    $(".etudiant").hide();
+    $(".recruteur").show();
+  });
+  $("#etudiant_rb").click(function(){
+    $(".recruteur").hide();
+    $(".etudiant").show();
+  });
+});
+</script>
+{%endblock%}
+{% endblock %}

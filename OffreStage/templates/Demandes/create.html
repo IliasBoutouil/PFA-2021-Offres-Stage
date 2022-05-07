@@ -1,0 +1,52 @@
+{% extends '../master.html' %}
+{% block content %}
+<div class="container">
+   <form method="post">
+      {%  csrf_token %}
+      <div class="row w-75 m-auto shadow p-4 my-3">
+         <h3 class="text-center text-success mb-3 ">Créer votre demande maintenant</h3>
+   <h6 class="text-muted  mb-3">Merci de remplir tous les champs du formulaire :</h6>
+         <div class="row mb-3">
+            <div class="col-3">
+               <label class="form-label fw-bold">Titre :</label>
+            </div>
+            <div class="col-9 w-75"><input type="text" class="form-control" name="titre"
+                  placeholder="Entrez le titre de votre offre"></div>
+         </div>
+         <div class="row mb-3">
+            <div class="col-12">
+               <label class="form-label fw-bold">Description :</label>
+            </div>
+            <div class="col-12"><textarea class="form-control" name="description" rows="10"></textarea></div>
+         </div>
+         <div class="row mb-3">
+            <div class="col-3">
+               <label class="form-label fw-bold">Domaine :</label>
+            </div>
+            <div class="col-9 w-75"> <select class="form-select" name="domaine">
+                  <option selected disabled>Choisir un domaine</option>
+                  <option value="informatique et réseaux">INFORMATIQUE ET RÉSEAUX</option>
+                  <option value="financière et audit">FINANCIÈRE ET AUDIT</option>
+                  <option value="génie civil, bâtiments et travaux publics">GÉNIE CIVIL, BÂTIMENTS ET TRAVAUX PUBLICS
+                  </option>
+                  <option value="automatismes et informatique industrielle">AUTOMATISMES ET INFORMATIQUE INDUSTRIELLE
+                  </option>
+               </select></div>
+         </div>
+         <div class="row mb-3">
+            <div class="col-3">
+               <label class="form-label fw-bold">Periode (mois) :</label>
+            </div>
+            <div class="col-9 w-75">
+               <input type="number" max="6" min="1" class="form-control" name="periode" placeholder="Entre la période du stage"> 
+            </div>
+         </div>
+         <div class="row mb-3">
+            <div class="col">
+               <button class="btn btn-success float-end">Créer la demande <i class="fas fa-plus-circle"></i></button>
+            </div>
+         </div>
+   </form>
+</div>
+
+{% endblock %}

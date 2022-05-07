@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    {% block styling %}
+    {% endblock %}
+{% block title %}
+        {% endblock %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">Emsi Stagiaire</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item  ">
+                        <a class="nav-link" style="color:#fff" href="{% url 'home' %}"><i class="fas fa-home"></i>
+                            Accueil</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " style="color:#fff" href="{% url 'List Offres' %}"> <i
+                                class="fas fa-briefcase "></i> Offres de
+                            stage</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" style="color:#fff" href="{% url 'List demandes' %}"><i
+                                class="fas fa-list"></i> Demandes de
+                            stage</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" style="color:#fff" href="{% url 'Etudiants' %}"><i
+                                class="fas fa-graduation-cap"></i> Nos
+                            étudiants</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if request.user.id is None %}
+                    <li class="nav-item ">
+                        <a class="nav-link " style="color:#fff" href="{% url 'Login' %}"><i class="fas fa-sign-in-alt"></i>
+                            S'authentifier</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " style="color:#fff" href="{% url 'Inscription' %}"><i
+                                class="fas fa-user-edit"></i> S'inscrire</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item ">
+                        <a class="nav-link" style="color:#fff" href="{% url 'profile' %}"> <i class="fas fa-users-cog"></i>
+                            {{request.user.first_name}} {{request.user.last_name}}</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" style="color:#fff" href="{% url 'Logout' %}"><i class="fas fa-sign-out-alt"></i>
+                            Se déconnecter
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+         
+        </div>
+    </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %} alert-danger {%else%} alert-success {%endif%} alert-dismissible fade show w-50 m-auto mt-3 px-5"
+        role="alert">
+        <i class="fas fa-bell mx-2"></i> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {%endfor%}
+    {%endif%}
+
+    {% block content %}
+    {% endblock %}
+    <div class="container my-5">
+        <footer class="footer-bs shadow-sm  ">
+            <div class="row">
+                <div class="col-md-4 footer-brand">
+                    <h4>Emsi Stagiaire</h4>
+                    <p> Votre intégration au marché professionnel est à présent simple, rapide et efficace.</p>
+                    <p>© 2021, All rights reserved</p>
+                </div>
+                <div class="col-md-4 footer-nav">
+                    <div class="col-md">
+                        <ul class="list">
+                            <li><i class="fas fa-map-marker-alt mx-2 "></i> 137 Rue Al Bakri Imm 12 E3 Casablanca. </li>
+                            <li><i class="fab fa-whatsapp mx-2 "></i> +212 648 098 725</li>
+                            <li><i class="fas fa-phone mx-2 "></i> +212 522 232 427</li>
+                            <li><i class="fas fa-envelope mx-2 "></i>emsi.stages@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-social">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="/"><i class="fab fa-facebook-f mx-2 text-success"></i></a> <a href="/"><i
+                                    class="fab fa-twitter mx-2 text-success"></i></a> <a href="/"><i
+                                    class="fab fa-instagram mx-2 text-success"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    {% block scripts%}
+    {%endblock%}
+</body>
+
+</html>

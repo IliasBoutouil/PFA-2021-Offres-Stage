@@ -1,0 +1,56 @@
+{% extends '../../master.html' %}
+{% block title %}
+<title>Dashboard</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+
+  <div class="row m-5 w-75 shadow p-3">
+    <div class="col-4">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span class='text-primary fw-bold'>Nom : </span>{{request.user.first_name}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Prenom : </span>{{request.user.last_name}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Email :</span> {{request.user.email}}</li>
+      </ul>
+    </div>
+  </div>
+<div class="row">
+    <div class="col-12"><h3>Liste des publications</h3></div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Domaine</th>
+                <th scope="col">Date </th>
+                <th scope="col">Periode</th>
+                <th scope="col">État</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for pub in publications%}
+              <tr>
+                <td>{% if pub.etat %} <a class="text-decoration-none"
+                    href="{% url pub.type_publication pk=pub.id %}">{{pub.titre}}</a> {%else%} {{pub.titre}} {%endif%} </td>
+                <td class="text-truncate" style="max-width: 250px">{{pub.description}}</td>
+                <td>{{pub.domaine}}</td>
+                <td>{{pub.date_publication}}</td>
+                <td>{{pub.periode}} mois</td>
+                <td>{% if pub.etat %} Approuvé {%else%} En attente {%endif%}</td>
+                <td>
+                    <a href="{% url 'Delete Demande' pk=pub.id %}" class="btn btn-link text-danger"><i class="far fa-trash-alt"></i></a>
+                    <a>{% if pub.etat == False %}<a href="{% url 'approve' pk=pub.id %}" class="btn btn-link text-success"><i class="far fa-check-circle"></i></a> {%endif%}</a> 
+                </td>
+                </td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+    </div>
+</div>
+  
+</div>
+
+{% endblock %}

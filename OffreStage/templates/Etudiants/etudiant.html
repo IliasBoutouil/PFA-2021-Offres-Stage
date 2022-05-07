@@ -1,0 +1,27 @@
+{% extends '../master.html' %}
+{% block content %}
+<div class="container">
+
+  <div class="row m-5 w-75 shadow p-5">
+    <div class="col-lg-4 col-sm-6"><img class="img-thumbnail" {%if student.photo  %} src="{{student.photo.url}}" {%else%}
+        src="/media/no_img.jpg" {%endif%} /></div>
+    <div class="col-lg-8 col-sm-6">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span class='text-primary fw-bold'>Nom : </span>{{student.first_name}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Prenom : </span>{{student.last_name}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Date naissance : </span>{{student.birthday}}
+        </li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Filiere : </span>{{student.domaine}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Email :</span> {{student.email}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Numéro téléphone :
+          </span>{{student.phone_number}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Adresse : </span>{{student.address}}</li>
+        {%if student.Cv %} <li class="list-group-item"><span class='text-primary fw-bold'><a
+              class="text-decoration-none" href='{{student.Cv.url}}'>Consutler le cv <i
+                class="fas fa-file-alt"></i></a></span></li> {%endif%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

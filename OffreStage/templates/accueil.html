@@ -1,0 +1,59 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block styling %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+{% block title %}
+<title>Emsi Stagiaire</title>
+{% endblock %}
+<div class="container">
+    <header>
+        <div class="header shadow  mb-5 bg-body rounded" style="background: url('media/media_style/header_img.jpg')">
+            <div class="texts">
+                <h2 class="marker text-uppercase " style="color: #008D36;"> Emsi Stagiaire</h2>
+                <h6 class="text-muted">Trouvez un stage en un seul clic.</h6>
+                <p class="w-50">Trouvez des contacts et intégrer le marché professionnel grâce à notre plateforme dédié
+                    100% aux
+                    étudiants de l'EMSI</p>
+                <div class="btn-holder"> <a href="{% url 'List Offres' %}" class="btn btn-success"> Consulter nos offres
+                        <i class="fas fa-briefcase mx-2"></i></a></div>
+            </div>
+        </div>
+    </header>
+    <div class="row d-flex justify-content-center">
+        {% if not request.user.id %} <div class="col-12">
+            <h3 class="text-success text-center">Connectez-vous pour accéder à plus de fonctionnalités</h3>
+        </div> {% else %}
+        <div class="col-12">
+            <h3 class="text-success text-center">Dernières offres de stage : </h3>
+        </div>
+        {% for offre in offres %}
+        <div class="col-sm-6 col-lg-3 shadow m-3 px-4 py-3 rounded-2">
+            <h5 class="text-uppercase">{{offre.titre}} - {{offre.domaine}}</h5>
+            <h6 class="text-success">{{offre.user.nom_entreprise}}</h6>
+            <h6 class="text-muted">{{offre.date_publication}}</h6>
+            <p class="text-secondary">{{offre.brief}}...</p>
+            <div class="col"> <a class="text-decoration-none" href="/publications/offres/{{offre.id}}">Voir
+                    plus <i class="fas fa-caret-right"></i></a></div>
+        </div>
+        {% endfor %}
+        <div class="col-12">
+            <h3 class="text-success text-center">Dernières demandes de stage : </h3>
+        </div>
+        {% for demande in demandes %}
+        <div class="col-sm-6 col-lg-3 shadow m-3 px-4 py-3 rounded-2">
+            <h5 class="text-uppercase">{{demande.titre}} - {{demande.domaine}}</h5>
+            <h6 class="text-success"><a class="text-decoration-none"
+                    href="{% url 'Etudiant' pk=demande.user.id%} ">{{demande.user.first_name}}
+                    {{demande.user.last_name}}</a></h6>
+            <h6 class="text-muted">{{demande.date_publication}}</h6>
+            <p class="text-secondary">{{demande.brief}}...</p>
+            <div class="col"> <a class="text-decoration-none" href="/publications/demandes/{{demande.id}}">Voir plus <i
+                        class="fas fa-caret-right"></i></a></div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

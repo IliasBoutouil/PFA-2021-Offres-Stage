@@ -1,0 +1,60 @@
+{% extends '../../master.html' %}
+{% block title %}
+<title>{{request.user.first_name}}</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+
+  <div class="row m-5 w-75 shadow p-3">
+    <div class="col-lg-4 col-sm-6"><img class="img-thumbnail" {%if request.user.photo %} src="{{request.user.photo.url}}" {%else%}
+        src="/media/no_img.jpg" {%endif%} /></div>
+    <div class="col-lg-6 col-sm-6">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span class='text-primary fw-bold'>Nom : </span>{{request.user.first_name}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Prenom : </span>{{request.user.last_name}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Date naissance : </span>{{request.user.birthday}}
+        </li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Filiere : </span>{{request.user.domaine}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Email :</span> {{request.user.email}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Numéro téléphone :
+          </span>{{request.user.phone_number}}</li>
+        <li class="list-group-item"><span class='text-primary fw-bold'>Adresse : </span>{{request.user.address}}</li>
+        {%if request.user.Cv %} <li class="list-group-item"><span class='text-primary fw-bold'><a
+              class="text-decoration-none" href='{{student.Cv.url}}'>Curriculum Vitae <i
+                class="fas fa-file-alt"></i></a></span></li> {%endif%}
+
+      </ul>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Domaine</th>
+        <th scope="col">Date </th>
+        <th scope="col">Periode</th>
+        <th scope="col">État</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for pub in demandes%}
+      <tr>
+        <td>{% if pub.etat %} <a class="text-decoration-none"
+            href="{% url 'Demande' pk=pub.id %}">{{pub.titre}}</a> {%else%} {{pub.titre}} {%endif%} </td>
+        <td class="text-truncate" style="max-width: 250px">{{pub.description}}</td>
+        <td>{{pub.domaine}}</td>
+        <td>{{pub.date_publication}}</td>
+        <td>{{pub.periode}} mois</td>
+        <td>{% if pub.etat %} Approuvé {%else%} En attente {%endif%}</td>
+        <td><a style="text-decoration: none;" href="{% url 'Delete Demande' pk=pub.id %}" class="text-decoration-none text-danger"><i class="far fa-trash-alt"></i></a>
+        </td>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
